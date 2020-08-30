@@ -11,22 +11,19 @@ function cb(err, header, body) {
     // request is successfully processed
     if (err == null && header.statusCode == 200) {
         console.log("recieved Response");
-        // console.log("Html recieved");
         parseHtml(body);
-        // fs=> file system
-        // fs.writeFileSync("page.html", body);
-    } else if (header.statusCode == 404) {
+    } 
+    else if (header.statusCode == 404) {
         console.log("Page Not found");
-    } else {
+    }
+    else {
         console.log(err);
         console.log(header);
     }
 }
 function parseHtml(body) {
     let $ = cheerio.load(body);
-    // .match-cta-container a
     let allMatches = $(".col-md-8.col-16");
-    // console.log(allMatches.length);
     for (let i = 0; i < allMatches.length; i++) {
         let allAnchors = $(allMatches[i]).find(".match-cta-container a");
         let scorecardA = allAnchors[0];
